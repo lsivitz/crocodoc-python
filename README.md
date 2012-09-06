@@ -1,4 +1,6 @@
 crocodoc-python
 ===============
 
-Python Wrapper for Crocodoc's API
+Python wrapper for Crocodoc API
+
+NOTE: requests module needed.
