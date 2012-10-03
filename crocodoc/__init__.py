@@ -20,8 +20,7 @@ class CrocodocError(Exception):
             content = self.response_content[:100] + "..."
         params = (self.error_message, self.status_code, content)
         return "\n\t%s \n\tResponse status code: %s \n\tResponse content: %s" % params
-        
-class InvalidParamError(CrocodocError): pass
+
 
 def handleresponse(r, ignorejson=False):
     #Check for JSON error
