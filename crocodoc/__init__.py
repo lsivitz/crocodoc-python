@@ -27,7 +27,7 @@ def handleresponse(r, ignorejson=False):
     #Check for JSON error
     if not ignorejson:
         if not r.json:
-            raise CrocodocError("Invalid JSON response", r)
+            raise CrocodocError("server_response_not_valid_json", r)
         elif isinstance(r.json, dict) and "error" in r.json:
             raise CrocodocError(r.json["error"], r)
 
