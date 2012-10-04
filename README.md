@@ -97,7 +97,7 @@ If you passed in an array instead of a string, this function returns an array of
     // status contains status['status'] and status['viewable']
     status = crocodoc.document.status(uuid)
     
-    // $statuses contains an array of status dictionaries
+    // statuses contains an array of status dictionaries
     statuses = crocodoc.document.status([uuid, uuid2])
     
 #### Delete
