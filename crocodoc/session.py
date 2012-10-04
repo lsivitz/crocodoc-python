@@ -10,10 +10,9 @@ def create(uuid, **kwargs):
             del kwargs[key]
     
     #User?
-    if "user" in kwargs:
-        if "id" in kwargs["user"] and "name" in kwargs["user"]:
-            data["user"] = str(kwargs["user"]["id"]) + ',' + kwargs["user"]["name"]
-            del kwargs["user"]
+    if "user" in kwargs and "id" in kwargs["user"] and "name" in kwargs["user"]:
+        data["user"] = str(kwargs["user"]["id"]) + ',' + kwargs["user"]["name"]
+        del kwargs["user"]
             
     #Filter?
     if "filter" in kwargs:
