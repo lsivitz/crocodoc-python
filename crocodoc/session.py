@@ -10,30 +10,28 @@ def create(uuid, **kwargs):
             del kwargs[key]
     
     #User?
-    if "user" in kwargs:
-        data["user"] = kwargs["user"]
+    if "user" in kwargs and "id" in kwargs["user"] and "name" in kwargs["user"]:
+        data["user"] = str(kwargs["user"]["id"]) + ',' + kwargs["user"]["name"]
         del kwargs["user"]
             
     #Filter?
     if "filter" in kwargs:
         data["filter"] = kwargs["filter"]
         del kwargs["filter"]
-    
-    #Left-over arguments?
-    if not kwargs == {}:
-        raise crocodoc.InvalidParamError("invalid parameters: " + ', '.join(kwargs.iterkeys()))
+        
+    #Sidebar?
+    if "sidebar" in kwargs:
+        data["sidebar"] = kwargs["sidebar"]
+        del kwargs["sidebar"]
     
     #POST request
     r = requests.post(crocodoc.base_url + "session/create", data)
     
-    #Success?
-    if r.json and "session" in r.json:
-        return r.json["session"]
-    
     #Error?
-    if not r.json:
-        raise crocodoc.APIError("Invalid JSON response", r)
-    elif "error" in r.json:
-        raise crocodoc.APIError(r.json["error"], r)
+    crocodoc.handleresponse(r)
+    
+    #Success?
+    if "session" in r.json:
+        return r.json["session"]
     else:
-        raise crocodoc.APIError("Missing session in JSON response", r)
+        raise crocodoc.CrocodocError("missing_session_key", r)

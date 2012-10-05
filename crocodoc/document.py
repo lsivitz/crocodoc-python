@@ -1,34 +1,31 @@
 import crocodoc, requests
 
 def upload(url=None, file=None):
-    #Validate token
-    if not crocodoc.api_token:
-        raise crocodoc.InvalidParamError("Please set an API token.")
-    
     #POST request
     data = { "token": crocodoc.api_token }
     files = {}
     if file:
         files["file"] = file 
-    if url:
+    elif url:
         data["url"] = url
+    else:
+        raise crocodoc.CrocodocError("invalid_url_or_file_param", r)
     r = requests.post(crocodoc.base_url + "document/upload", data=data, files=files)
     
-    #Success?
-    if r.json and "uuid" in r.json:
-        return r.json["uuid"]
-    
     #Error?
-    if not r.json:
-        raise crocodoc.APIError("Invalid JSON response", r)
-    elif "error" in r.json:
-        raise crocodoc.APIError(r.json["error"], r)
+    crocodoc.handleresponse(r)
+    
+    #Success?
+    if "uuid" in r.json:
+        return r.json["uuid"]
     else:
-        raise crocodoc.APIError("Missing uuid in JSON response", r)
+        raise crocodoc.CrocodocError("missing_uuid", r)
+
 
 def status(uuids):
     #Single uuid?
-    if isinstance(uuids, basestring):
+    single_uuid = isinstance(uuids, basestring)
+    if single_uuid:
         uuids = [uuids]
     
     #GET request
@@ -36,27 +33,21 @@ def status(uuids):
     url = crocodoc.base_url + "document/status?" + querystring
     r = requests.get(url)
     
-    #Got status?
-    if r.json:
-        return r.json
     #Error?
-    else:
-        raise crocodoc.APIError("Invalid JSON response", r)
+    crocodoc.handleresponse(r)
+    
+    #Success!
+    return r.json[0] if single_uuid else r.json
+
 
 def delete(uuid):
     #POST request
     data = { "uuid": uuid, "token": crocodoc.api_token }
     url = crocodoc.base_url + "document/delete"
     r = requests.post(url, data)
-
-    #Success?
-    if r.json and r.json == True:
-        return
-
+    
     #Error?
-    if not r.json:
-        raise crocodoc.APIError("Invalid JSON response", r)
-    elif "error" in r.json:
-        raise crocodoc.APIError(r.json["error"], r)
-    else:
-        raise crocodoc.APIError("Unexpected JSON response", r)
+    crocodoc.handleresponse(r)
+
+    #Success!
+    return True

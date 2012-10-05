@@ -1,6 +1,6 @@
 import crocodoc, requests
 
-def document(file, uuid, pdf=False, annotated=False, filter=None):
+def document(uuid, pdf=False, annotated=False, filter=None):
     #Build query string
     querystring = "uuid=%s&token=%s" % (uuid, crocodoc.api_token)
     if pdf:
@@ -14,52 +14,39 @@ def document(file, uuid, pdf=False, annotated=False, filter=None):
     url = crocodoc.base_url + "download/document?" + querystring
     r = requests.get(url)
     
-    #Success?
-    if r.status_code == 200:
-        return file.write(r.content)
-    
     #Error?
-    if r.json and "error" in r.json:
-        raise crocodoc.APIError(r.json["error"], r)
-    else:
-        raise crocodoc.APIError("Download error", r)
+    crocodoc.handleresponse(r, True)
+    
+    #Success!
+    return r.content
     
     
-def thumbnail(file, uuid, size=(100,100)):
-    #Validate inputs
-    if isinstance(size, basestring):
-        raise crocodoc.InvalidParamError("'size' should be a tuple of two integers: (width, height)")
-        
+def thumbnail(uuid, width=None, height=None):
     #Build query string
-    querystring = "uuid=%s&token=%s&size=%dx%d" % (uuid, crocodoc.api_token, size[0], size[1])
+    querystring = "uuid=%s&token=%s" % (uuid, crocodoc.api_token)
+    
+    if width is not None and height is not None:
+        querystring += "&size=%dx%d" % (width, height)
 
     #GET request
     url = crocodoc.base_url + "download/thumbnail?" + querystring
     r = requests.get(url)
     
-    #Success?
-    if r.status_code == 200:
-        return file.write(r.content)
-    
     #Error?
-    if r.json and "error" in r.json:
-        raise crocodoc.APIError(r.json["error"], r)
-    else:
-        raise crocodoc.APIError("Download error", r)
+    crocodoc.handleresponse(r, True)
+    
+    #Success!
+    return r.content
     
     
-def text(file, uuid):
+def text(uuid):
     #GET request
     querystring = "uuid=%s&token=%s" % (uuid, crocodoc.api_token)
     url = crocodoc.base_url + "download/text?" + querystring
     r = requests.get(url)
     
-    #Success?
-    if r.status_code == 200:
-        return file.write(r.content)
-    
     #Error?
-    if r.json and "error" in r.json:
-        raise crocodoc.APIError(r.json["error"], r)
-    else:
-        raise crocodoc.APIError("Download error", r)
+    crocodoc.handleresponse(r, True)
+    
+    #Success!
+    return r.content
