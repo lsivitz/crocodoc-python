@@ -28,7 +28,6 @@ Check the status of the file from Example #1.
 """
 print ''
 print 'Example #2 - Check the status of the file we just uploaded.'
-
 sys.stdout.write('  Checking status... ')
 
 try:
@@ -47,16 +46,17 @@ except CrocodocError as e:
     print '  Error Message: ' + e.error_message
     
 """
- Example #3
- 
- Upload another file to Crocodoc. We're uploading Crocodoc's logo as a file.
+Example #3
+
+Upload another file to Crocodoc. We're uploading Form W4 from the IRS as a PDF.
 """
 print ''
 print 'Example #3 - Upload a sample .pdf as a file.'
+uuid2 = None
 file_path = './example-files/form-w4.pdf'
 
 if (os.path.isfile(file_path)):
-    file_handle = open(file_path, 'r+')
+    file_handle = open(file_path, 'r')
     sys.stdout.write('  Uploading... ')
     uuid2 = None
     
@@ -180,7 +180,7 @@ sys.stdout.write('  Downloading... ')
 try:
     file = crocodoc.download.document(uuid2)
     filename = os.path.dirname(os.path.abspath(__file__)) + '/example-files/test-original.pdf'
-    file_handle = open(filename, 'wb')
+    file_handle = open(filename, 'w')
     file_handle.write(file)
     print 'success :)'
     print '  File was downloaded to ' + filename + '.'
@@ -201,7 +201,7 @@ sys.stdout.write('  Downloading...')
 try:
     file = crocodoc.download.document(uuid2, True)
     filename = os.path.dirname(os.path.abspath(__file__)) + '/example-files/test.pdf'
-    file_handle = open(filename, 'wb')
+    file_handle = open(filename, 'w')
     file_handle.write(file)
     print 'success :)'
     print '  File was downloaded to ' + filename + '.'
@@ -222,7 +222,7 @@ sys.stdout.write('  Downloading...')
 try:
     file = crocodoc.download.document(uuid2, True, True, 'all')
     filename = os.path.dirname(os.path.abspath(__file__)) + '/example-files/test-with-options.pdf'
-    file_handle = open(filename, 'wb')
+    file_handle = open(filename, 'w')
     file_handle.write(file)
     print 'success :)'
     print '  File was downloaded to ' + filename + '.'
@@ -234,7 +234,7 @@ except CrocodocError as e:
 """
 Example #10
 
-Download the file we uploaded from Example #3 with as a default thumbnail
+Download the file we uploaded from Example #3 as a default thumbnail
 """
 print ''
 print 'Example #10 - Download a default thumbnail from a file.'
@@ -242,8 +242,8 @@ sys.stdout.write('  Downloading...')
 
 try:
     file = crocodoc.download.thumbnail(uuid2)
-    filename = os.path.dirname(os.path.abspath(__file__)) + '/example-files/thumbnail.pdf'
-    file_handle = open(filename, 'wb')
+    filename = os.path.dirname(os.path.abspath(__file__)) + '/example-files/thumbnail.png'
+    file_handle = open(filename, 'w')
     file_handle.write(file)
     print 'success :)'
     print '  File was downloaded to ' + filename + '.'
@@ -255,7 +255,7 @@ except CrocodocError as e:
 """
 Example #11
 
-Download the file we uploaded from Example #3 with as a large thumbnail
+Download the file we uploaded from Example #3 as a large thumbnail
 """
 print ''
 print 'Example #11 - Download a large thumbnail from a file.'
@@ -263,8 +263,8 @@ sys.stdout.write('  Downloading...')
 
 try:
     file = crocodoc.download.thumbnail(uuid2, 250, 250)
-    filename = os.path.dirname(os.path.abspath(__file__)) + '/example-files/thumbnail-large.pdf'
-    file_handle = open(filename, 'wb')
+    filename = os.path.dirname(os.path.abspath(__file__)) + '/example-files/thumbnail-large.png'
+    file_handle = open(filename, 'w')
     file_handle.write(file)
     print 'success :)'
     print '  File was downloaded to ' + filename + '.'
@@ -285,7 +285,7 @@ sys.stdout.write('  Downloading...')
 try:
     file = crocodoc.download.text(uuid2)
     filename = os.path.dirname(os.path.abspath(__file__)) + '/example-files/test.txt'
-    file_handle = open(filename, 'wb')
+    file_handle = open(filename, 'w')
     file_handle.write(file)
     print 'success :)'
     print '  File was downloaded to ' + filename + '.'

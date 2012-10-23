@@ -2,7 +2,7 @@
 
 ## Introduction
 
-crocodoc-python is a Python Wrapper for the Crocodoc API.
+crocodoc-python is a Python wrapper for the Crocodoc API.
 The Crocodoc API lets you upload documents and then generate secure and customized viewing sessions for them.
 Our API is based on REST principles and generally returns JSON encoded responses,
 and in Python are converted to dictionaries unless otherwise noted.
@@ -51,7 +51,7 @@ To start using crocodoc-py in your code, set your API token:
 
     crocodoc.api_token = 'YOUR_API_TOKEN'
     
-And now you can start using the methods in crocodoc.document, crocodoc.download, crocodoc.session.
+And now you can start using the methods in crocodoc.document, crocodoc.download, and crocodoc.session.
 
 Read on to find out more how to use crocodoc-python.
 You can also find more detailed information about our API here:
@@ -65,8 +65,8 @@ Errors are handled by throwing exceptions.
 We throw instances of CrocodocError.
 
 Note that any Crocodoc API call can throw an exception.
-When making API calls, put them in a try/catch block.
-You can see examples.py to see working code for each method using try/catch blocks.
+When making API calls, put them in a try/except block.
+You can see examples.py to see working code for each method using try/except blocks.
 
 ### Document
 
@@ -83,7 +83,7 @@ This function returns a UUID of the file.
     uuid = crocodoc.document.upload(url=url)
     
     // with a file
-    file_handle = open(file_path, 'r+')
+    file_handle = open(file_path, 'r')
     uuid = crocodoc.document.upload(file=file_handle)
     
 #### Status
