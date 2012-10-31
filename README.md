@@ -9,9 +9,11 @@ and in Python are converted to dictionaries unless otherwise noted.
 
 ## Installation
 
-First, get the library.
-Navigate into the folder you want to keep the library in.
-We suggest adding the library as a submodule in your git project.
+We suggest installing the library using pip.
+
+    pip install crocodoc
+
+You can also add the library as a submodule in your git project.
 
     git submodule add git@github.com:crocodoc/crocodoc-python.git
 
