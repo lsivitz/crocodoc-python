@@ -31,7 +31,7 @@ def create(uuid, **kwargs):
     crocodoc.handleresponse(r)
     
     #Success?
-    if "session" in r.json:
-        return r.json["session"]
+    if "session" in r.json():
+        return r.json()["session"]
     else:
         raise crocodoc.CrocodocError("missing_session_key", r)
