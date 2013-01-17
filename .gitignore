@@ -1,2 +1,4 @@
 *.pyc
 .DS_Store
+example-files/test*
+example-files/*.png

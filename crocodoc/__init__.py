@@ -25,10 +25,10 @@ class CrocodocError(Exception):
 def handleresponse(r, ignorejson=False):
     #Check for JSON error
     if not ignorejson:
-        if not r.json:
+        if not r.json():
             raise CrocodocError("server_response_not_valid_json", r)
-        elif isinstance(r.json, dict) and "error" in r.json:
-            raise CrocodocError(r.json["error"], r)
+        elif isinstance(r.json(), dict) and "error" in r.json():
+            raise CrocodocError(r.json()["error"], r)
 
     #Check for HTTP error
     http_4xx_error_codes = {
@@ -39,7 +39,7 @@ def handleresponse(r, ignorejson=False):
     }
     
     if (http_4xx_error_codes.has_key(r.status_code)):
-        error = 'server_error_' + r.status_code + '_' + http_4xx_error_codes[r.status_code]
+        error = 'server_error_' + str(r.status_code) + '_' + http_4xx_error_codes[r.status_code]
         raise CrocodocError(error, r)
     elif r.status_code >= 500 and r.status_code < 600:
         error = 'server_error_' + r.status_code + '_unknown'

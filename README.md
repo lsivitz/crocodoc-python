@@ -32,6 +32,13 @@ To download:
 Import the library:
 
     import crocodoc
+
+### Dependencies
+
+This library requires that the newest version of Python's requests module be installed.
+To install or update this module:
+
+    sudo pip install requests -U
     
 ## Getting Started
 
