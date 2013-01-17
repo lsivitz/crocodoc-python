@@ -42,7 +42,7 @@ def handleresponse(r, ignorejson=False):
         error = 'server_error_' + str(r.status_code) + '_' + http_4xx_error_codes[r.status_code]
         raise CrocodocError(error, r)
     elif r.status_code >= 500 and r.status_code < 600:
-        error = 'server_error_' + r.status_code + '_unknown'
+        error = 'server_error_' + str(r.status_code) + '_unknown'
         raise CrocodocError(error, r)
 
     # if we made it this far, we're good to go
