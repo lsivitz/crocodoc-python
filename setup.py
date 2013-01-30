@@ -1,17 +1,30 @@
-import os
-import sys
-from crocodoc import version
+from setuptools import setup
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
-
-setup(name='crocodoc',
-      version=version.VERSION,
-      description='Python wrapper for the Crocodoc API',
-      author='Brandon Goldman',
-      author_email='brandon.goldman@gmail.com',
-      url='https://crocodoc.com/docs/api/',
-      packages=['crocodoc'],
+setup(
+    name="crocodoc",
+    packages=['crocodoc'],
+    version='0.1.0',
+    author="Crocodoc, Inc.",
+    license="MIT",
+    author_email="admin@crocodoc.com",
+    url="https://crocodoc.com",
+    description="A Python wrapper around the Crocodoc API.",
+    #long_description="",
+    install_requires=['requests>=1.0.3'],
+    zip_safe=False,
+    include_package_data=True,
+    classifiers=[
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+        'Operating System :: MacOS :: MacOS X',
+        'Operating System :: Unix',
+        'Operating System :: POSIX',
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Developers',
+        'Intended Audience :: System Administrators',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+        'License :: OSI Approved :: MIT License',
+    ],
 )
