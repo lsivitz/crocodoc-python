@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name="crocodoc",
     packages=['crocodoc'],
-    version='0.1.0',
+    version='0.1.1',
     author="Crocodoc, Inc.",
     license="MIT",
     author_email="admin@crocodoc.com",
