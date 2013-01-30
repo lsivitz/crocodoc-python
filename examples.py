@@ -1,5 +1,10 @@
-import crocodoc, os, sys, time
+import os
+import sys
+import time
+
+import crocodoc
 from crocodoc import CrocodocError
+
 crocodoc.api_token = 'YOUR_API_TOKEN'
 
 """
@@ -276,32 +281,11 @@ except CrocodocError as e:
 """
 Example #12
 
-Download extracted text from the file we uploaded from Example #3
-"""
-print ''
-print 'Example #12 - Download extracted text from a file.'
-sys.stdout.write('  Downloading...')
-
-try:
-    file = crocodoc.download.text(uuid2)
-    filename = os.path.dirname(os.path.abspath(__file__)) + '/example-files/test.txt'
-    file_handle = open(filename, 'w')
-    file_handle.write(file)
-    print 'success :)'
-    print '  File was downloaded to ' + filename + '.'
-except CrocodocError as e:
-    print 'failed :('
-    print '  Error Code: ' + str(e.status_code)
-    print '  Error Message: ' + e.error_message
-    
-"""
-Example #13
-
 Create a session key for the file we uploaded from Example #3 with default
 options.
 """
 print ''
-print 'Example #13 - Create a session key for a file with default options.'
+print 'Example #12 - Create a session key for a file with default options.'
 sys.stdout.write('  Creating... ')
 session_key = None
 
@@ -315,13 +299,13 @@ except CrocodocError as e:
     print '  Error Message: ' + e.error_message
     
 """
-Example #14
+Example #13
 
 Create a session key for the file we uploaded from Example #3 all of the
 options.
 """
 print ''
-print 'Example #14 - Create a session key for a file with all of the options.'
+print 'Example #13 - Create a session key for a file with all of the options.'
 sys.stdout.write('  Creating... ')
 session_key = None
 
@@ -340,12 +324,12 @@ except CrocodocError as e:
     print '  Error Message: ' + e.error_message
     
 """
-Example #15
+Example #14
 
 Delete the second file we uploaded.
 """
 print ''
-print 'Example #15 - Delete the first file we uploaded.'
+print 'Example #14 - Delete the first file we uploaded.'
 sys.stdout.write('  Deleting... ')
 
 try:
